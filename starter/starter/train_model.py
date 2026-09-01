@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from starter.ml.data import process_data
 from starter.ml.model import (
     compute_model_metrics,
+    compute_slice_metrics,
     inference,
     save_model,
     train_model,
@@ -58,3 +59,29 @@ print(f"F1 Score: {fbeta:.3f}")
 save_model(model, encoder)
 print("Model and encoder saved to model/trained_model.pkl and "
       "model/trained_encoder.pkl")
+
+# Compute slice metrics for the education feature and write them to
+# slice_output.txt at the project root (starter/).
+X_test_raw = test.drop(columns=["salary"])
+y_test_raw = test["salary"]
+education_values = sorted(test["education"].unique())
+slice_metrics = compute_slice_metrics(
+    model,
+    encoder,
+    lb,
+    X_test_raw,
+    y_test_raw,
+    cat_features,
+    "education",
+    education_values,
+)
+SLICE_OUTPUT_PATH = (
+    Path(__file__).resolve().parent.parent / "slice_output.txt"
+)
+with open(SLICE_OUTPUT_PATH, "w", encoding="utf-8") as f:
+    for value, (precision, recall, fbeta) in slice_metrics.items():
+        f.write(
+            f"education = {value} | Precision: {precision:.3f} | "
+            f"Recall: {recall:.3f} | F1: {fbeta:.3f}\n"
+        )
+print(f"Slice metrics written to {SLICE_OUTPUT_PATH}")
