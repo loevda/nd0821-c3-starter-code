@@ -143,4 +143,3 @@ def predict(features: CensusFeatures) -> PredictionResponse:
     )
     pred = inference(model, X_processed)[0]
     return PredictionResponse(prediction=LABELS[int(pred)])
-

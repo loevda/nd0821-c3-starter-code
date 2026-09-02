@@ -42,6 +42,8 @@ def clean_data(
 
 if __name__ == "__main__":
     result = clean_data()
-    print(f"Saved {len(result)} rows x {len(result.columns)} cols to {CLEAN_FILE}")
+    print(
+        f"Saved {len(result)} rows x {len(result.columns)} cols "
+        f"to {CLEAN_FILE}"
+    )
     print("Columns:", result.columns.tolist())
-

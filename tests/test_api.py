@@ -61,7 +61,7 @@ def test_get_root_returns_greeting():
 
 
 def test_post_predict_returns_low_income():
-    """POST /predict must return 200 and predict <=50K for a low-income record."""
+    """POST /predict returns 200 and predicts <=50K for a low-income record."""
     response = client.post("/predict", json=LOW_INCOME_RECORD)
     assert response.status_code == 200
     body = response.json()
@@ -69,7 +69,7 @@ def test_post_predict_returns_low_income():
 
 
 def test_post_predict_returns_high_income():
-    """POST /predict must return 200 and predict >50K for a high-income record."""
+    """POST /predict returns 200 and predicts >50K for a high-income record."""
     response = client.post("/predict", json=HIGH_INCOME_RECORD)
     assert response.status_code == 200
     body = response.json()
