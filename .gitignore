@@ -174,7 +174,7 @@ temp/
 tmp/
 
 # Screenshots (unless specifically needed)
-screenshots/*.png
+#screenshots/*.png
 screenshots/*.jpg
 screenshots/*.jpeg
 !screenshots/.gitkeep
