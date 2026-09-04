@@ -29,3 +29,7 @@ jobs:
         run: |
           python -m pytest tests/ -v
 
+      - name: Deploy to Render
+        if: success()
+        run: curl -fsSL -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+
